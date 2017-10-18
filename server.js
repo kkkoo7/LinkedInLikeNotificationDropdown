@@ -32,7 +32,7 @@ MongoClient.connect(url, function(err, db) {
             if (err) throw err;
             datalist=datalist.concat(result);
             io.on('connection', function(socket) {
-                socket.emit('testerEvent', {description: data});
+                socket.emit('testerEvent', {description: datalist});
             });
             //data.length=0;
             console.log("query result: "+result.length)
