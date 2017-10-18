@@ -5,7 +5,7 @@ var io = require('socket.io')(http);
 var path = require('path')
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/notificationdb";
-var data=[];
+var datalist=[];
 
 setInterval(function () {
     MongoClient.connect(url,function (err,db) {
@@ -24,13 +24,13 @@ setInterval(function () {
 
 
 setInterval(function () {
-    data.length=0;
+    datalist.length=0;
 MongoClient.connect(url, function(err, db) {
     if (err) throw err;
         var query = { flag:0 };
         db.collection("notifications").find(query).toArray(function(err, result) {
             if (err) throw err;
-            data=data.concat(result);
+            datalist=datalist.concat(result);
             io.on('connection', function(socket) {
                 socket.emit('testerEvent', {description: data});
             });
@@ -60,6 +60,7 @@ io.on('connection', function(socket) {
                     console.log(result);
                 });
             });
+            datalist.length=0;
         }
         //this.data.length=0;
     });
