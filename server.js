@@ -44,7 +44,7 @@ MongoClient.connect(url, function(err, db) {
 
 app.get('/', function(req, res) {
     app.use(express.static(path.join(__dirname, '/public')));
-    res.sendFile(__dirname + '/notification.html');
+    res.sendFile(__dirname + '/index.html');
 });
 
 io.on('connection', function(socket) {
