@@ -18,7 +18,7 @@ setInterval(function () {
             console.log("inserted");
         }
 
-        db.close();
+        //db.close();
     })
 },60000);
 
@@ -36,7 +36,7 @@ MongoClient.connect(url, function(err, db) {
             });
             //data.length=0;
             console.log("query result: "+result.length)
-            db.close();
+            //db.close();
         });
 });
 }, 50000);
