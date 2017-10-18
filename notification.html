@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="/notification.css">
+<link rel="stylesheet" href="/font-awesome-4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<ul id="nav">
+    <li><a href="#">Link1</a></li>
+    <li><a href="#">Link2</a></li>
+    <li><a href="#">Link3</a></li>
+    <li id="notification_li">
+        <span id="notification_count"></span>
+        <a href="#" id="notificationLink"><i class="fa fa-bell fa-2x" aria-hidden="true"></i></a>
+
+        <div id="notificationContainer">
+            <div id="notificationTitle">
+                <h5>Notifications</h5>
+            </div>
+            <div id="notificationsBody" class="notificationsBody">
+                <!--<p id="not" class="notificationsMessage">Ankit</p>-->
+            </div>
+            <div id="notificationFooter"><a href="#">See All</a></div>
+        </div>
+
+    </li>
+    <li><a href="#">Link4</a></li>
+</ul>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script src = "/socket.io/socket.io.js"></script>
+<script type="text/javascript" >
+
+     var data1=[];
+     var socket = io();
+
+     socket.on('testerEvent', function(data){
+             data1=(data.description);
+         //setInterval(function () {
+            if(data1.length==0)
+            {
+                $("#notification_count").fadeOut("slow");
+            }
+            else
+            {
+                document.getElementById("notification_count").innerHTML=""+data1.length;
+            }
+             for(i=0;i<data1.length;i++)
+             {
+                 var text=document.createElement("p");
+                 //text.add("class",".notificationsMessage");
+                 text.innerHTML=(data1[i].name+" has viewed ur profile "+data1[i].noOfTimes+" times");
+
+                 $("#notificationsBody").append(text);
+             }
+             //data1.length=0;
+        // },5000);
+     });
+
+    $(document).ready(function()
+    {
+        /*if(data1.length==0)
+        {
+            $("#notification_count").fadeOut("fast");
+        }*/
+        $("#notificationLink").click(function()
+        {
+            $("#notificationContainer").fadeToggle(300);
+            $("#notification_count").fadeOut("slow");
+            socket.emit('clientEvent', 'updateflag');
+            return false;
+        });
+
+//Document Click hiding the popup
+        $(document).click(function()
+        {
+            $("#notificationContainer").hide();
+        });
+
+//Popup on click
+        $("#notificationContainer").click(function()
+        {
+            //e.stopPropagation();
+            return false;
+        });
+
+    });
+
+</script>
+</body>
+</html>
