@@ -3,7 +3,7 @@ var app=express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var path = require('path')
-var MongoClient = require('/node_modules/mongodb').MongoClient;
+var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/notificationdb";
 var data=[];
 
