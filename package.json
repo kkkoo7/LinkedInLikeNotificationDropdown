@@ -1,10 +1,10 @@
 {
-  "name": "LinkedInLikeNotificationDropdown",
+  "name": "linkedinnotificationsample",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "node server.js"
   },
   "author": "kkk",
   "license": "ISC",
