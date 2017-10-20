@@ -25,5 +25,16 @@ $ npm install --save express
 To install MongoDB
 $npm install mongoDB
 
+To install MongoDB Server
+sudo apt-get install mongodb-server 
+
+For running the application
+1. $mongod
+2. $cd ~/LinkedInLikeNotificationDropdown    (Path to the folder)
+3. $node server.js
+4. $http://localhost:3000/
+
+As soon as any new notification is found it will get reflected in the application. On clicking on bell, notifications would be marked as read in database.
+
 
 
