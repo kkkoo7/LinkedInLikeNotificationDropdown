@@ -2,6 +2,7 @@
 <html lang="en">
 <link rel="stylesheet" href="/notification.css">
 <link rel="stylesheet" href="/animation.css">
+<link rel="stylesheet" href="/searchbox.css">
 <link rel="stylesheet" href="/font-awesome-4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
@@ -10,7 +11,6 @@
     <ul>
         <li><a href="#">Link1</a></li>
         <li><a href="#">Link2</a></li>
-        <li><a href="#">Link3</a></li>
         <li class="drop" id="notification_li">
             <span id="notification_count"></span>
             <a href="#" id="notificationLink" class="dropdown-link"><i class="fa fa-bell fa-2x" aria-hidden="true"></i></a>
@@ -38,6 +38,10 @@
                 </div>
             </div>
         </li>
+        <form class="searchbox" action="" method="">
+            <input type="search" placeholder="What are you looking for?">
+            <button>Search</button>
+        </form>
     </ul>
 </nav>
 <script src = "/socket.io/socket.io.js"></script>
