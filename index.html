@@ -1,41 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <link rel="stylesheet" href="/notification.css">
+<link rel="stylesheet" href="/animation.css">
 <link rel="stylesheet" href="/font-awesome-4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<ul id="nav">
-    <li><a href="#">Link1</a></li>
-    <li><a href="#">Link2</a></li>
-    <li><a href="#">Link3</a></li>
-    <li id="notification_li">
-        <span id="notification_count"></span>
-        <a href="#" id="notificationLink"><i class="fa fa-bell fa-2x" aria-hidden="true"></i></a>
-
-        <div id="notificationContainer">
-            <div id="notificationTitle">
-                <h5>Notifications</h5>
-            </div>
-            <div id="notificationsBody" class="notificationsBody">
-                <!--<p id="not" class="notificationsMessage">Ankit</p>-->
-            </div>
-            <div id="notificationFooter"><a href="#">See All</a></div>
-        </div>
-
-    </li>
-    <li><a href="#">Link4</a></li>
-</ul>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<body>
+<nav>
+    <ul>
+        <li><a href="#">Link1</a></li>
+        <li><a href="#">Link2</a></li>
+        <li><a href="#">Link3</a></li>
+        <li class="drop" id="notification_li">
+            <span id="notification_count"></span>
+            <a href="#" id="notificationLink" class="dropdown-link"><i class="fa fa-bell fa-2x" aria-hidden="true"></i></a>
+            <div class="dropdownContain">
+                <div class="dropOut">
+                    <div class="triangle" id="notifbar">
+                        <ul id="alpha">
+                            <h5>Notifications<span id="notificationCount"></span></h5>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="drop"><a class="profile-dropdown" href="#"><img src="/Passport.jpg"></a>
+            <div class="dropdownContain1">
+                <div class="dropOut">
+                    <div class="triangle">
+                        <ul>
+                            <li>Plan</li>
+                            <li>Account Settings</li>
+                            <li>Switch Account</li>
+                            <li>Sign Out</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</nav>
 <script src = "/socket.io/socket.io.js"></script>
 <script type="text/javascript" >
-
+    var flag1=1;
+    $(document).ready(function(){
      var data1=[];
      var socket = io();
+     var flag=0;
 
      socket.on('testerEvent', function(data){
              data1=(data.description);
          //setInterval(function () {
             if(data1.length==0)
             {
+                $("#notificationCount").fadeOut("slow");
                 $("#notification_count").fadeOut("slow");
             }
             else
@@ -44,45 +62,53 @@
             }
              for(i=0;i<data1.length;i++)
              {
-                 var text=document.createElement("p");
-                 //text.add("class",".notificationsMessage");
-                 text.innerHTML=(data1[i].name+" has viewed ur profile "+data1[i].noOfTimes+" times");
-
-                 $("#notificationsBody").append(text);
+                 var ul = document.getElementById("alpha");
+                 var li = document.createElement("li");
+                 li.appendChild(document.createTextNode(data1[i].name+" has viewed ur profile "+data1[i].noOfTimes+" times"));
+                 ul.appendChild(li);
              }
-             //data1.length=0;
         // },5000);
      });
 
-    $(document).ready(function()
-    {
-        /*if(data1.length==0)
-        {
-            $("#notification_count").fadeOut("fast");
-        }*/
-        $("#notificationLink").click(function()
-        {
-            $("#notificationContainer").fadeToggle(300);
-            $("#notification_count").fadeOut("slow");
-            socket.emit('clientEvent', 'updateflag');
-            return false;
-        });
 
-//Document Click hiding the popup
-        $(document).click(function()
-        {
-            $("#notificationContainer").hide();
-        });
 
-//Popup on click
-        $("#notificationContainer").click(function()
-        {
-            //e.stopPropagation();
-            return false;
-        });
+         $(".drop").click(function() {
+             var $dropdown = $(this);
 
-    });
+             $("a.dropdown-link", $dropdown).click(function(e) {
+                 //e.preventDefault();
+                 document.getElementById("notificationCount").innerHTML=""+data1.length;
+                 $div = $("div.triangle", $dropdown);
+                 $div.toggle();
+                 $("div.triangle").not($div).hide();
+                 $("#notification_count").fadeOut("slow");
+                 socket.emit('clientEvent', 'updateflag');
+                 flag=1;
+                 return false;
+             });
 
+             $("a.profile-dropdown", $dropdown).click(function(e) {
+                 //e.preventDefault();
+                 $div = $("div.triangle", $dropdown);
+                 $div.toggle();
+                 $("div.triangle").not($div).hide();
+                 return false;
+             });
+
+         });
+
+         $('html').click(function(){
+             $("div.triangle").hide();
+             if(flag==1)
+             {
+                 $("#notificationCount").fadeOut("slow");
+                 flag=0;
+                 flag1=0;
+             }
+             return false;
+         });
+
+     });
 </script>
 </body>
 </html>

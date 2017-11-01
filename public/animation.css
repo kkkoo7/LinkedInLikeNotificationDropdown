@@ -23,6 +23,7 @@ ul li.drop {
 ul > li {
     display: inline-block;
 }
+
 ul li a {
     line-height: 80px;
     padding: 0 20px;
@@ -49,21 +50,29 @@ ul li a:hover {
     left: 50%;
     margin-left: -8px;
 }
+
 .dropdownContain {
-    width: 160px;
+    width: 320px;
     position: absolute;
     z-index: 2;
     left: 50%;
-    margin-left: -80px; /* half of width */
-    top: -400px;
+    margin-left: -150px;
+    top: 75px;
+}
+.dropdownContain1 {
+    width: 320px;
+    position: absolute;
+    z-index: 2;
+    left: 50%;
+    margin-left: -100px;
+    top: 75px;
 }
 .dropOut {
-    width: 160px;
-    background: white;
+    width: 320px;
     float: left;
     position: relative;
     margin-top: 0px;
-    opacity: 0;
+    opacity: 1 ;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px;
@@ -79,15 +88,17 @@ ul li a:hover {
 
 .dropOut ul {
     float: left;
+    margin-left: -150px;
     padding: 10px 0;
 }
 .dropOut ul li {
     text-align: left;
     float: left;
-    width: 125px;
+    width: 300px;
     padding: 12px 0 10px 15px;
     margin: 0px 10px;
-    color: #777;
+    color: #774b6d;
+    background-color: #ffe7b2;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px;
@@ -99,10 +110,7 @@ ul li a:hover {
 }
 
 .dropOut ul li:hover {
-    background: #f6f6f6;
+    background: #94899d;
 }
 
-ul li:hover a { color: white; }
-ul li:hover .dropdownContain { top: 65px; }
-ul li:hover .underline { border-bottom-color: #777; }
-ul li:hover .dropOut { opacity: 1; margin-top: 8px; }
+
